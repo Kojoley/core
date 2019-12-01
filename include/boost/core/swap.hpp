@@ -23,9 +23,14 @@
 
 #include <boost/core/enable_if.hpp>
 #include <boost/config.hpp>
-#include <utility> //for std::swap (C++11)
-#include <algorithm> //for std::swap (C++98)
 #include <cstddef> //for std::size_t
+
+// try to include std::swap from the most lightweight header
+#if __cplusplus >= 201103L
+# include <utility>
+#else // C++98/03 fallback
+# include <algorithm>
+#endif
 
 namespace boost_swap_impl
 {
